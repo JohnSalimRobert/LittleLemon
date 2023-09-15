@@ -503,7 +503,7 @@ display: flex;
 flex-direction: column;
 justify-items: center;
 align-items: center;
-height: 25rem;
+height: 30rem;
 }
 .Specials_cardBody{
   display: flex;
@@ -522,4 +522,53 @@ background-color: #EDEFEE;
 display: flex;
 width: 100%;
 justify-content: space-between;
+}
+
+
+/* Testimonies Section */
+
+.testimony-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #EDEFEE;
+  text-align: left;
+  width: 100%;
+  height: 110%;
+  border-radius: 16px;
+  padding: 1rem;
+  row-gap: .5rem;
+}
+.testimony-name {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: 1rem;
+}
+.testimony-card img {
+  border-radius: 50%;
+  width: 5rem;
+}
+.testimony-card p {
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+}
+
+.testimony-card h6{
+  font-family: 'karla', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+.Testimonials-section {
+  padding: 5% 20% 10% 20%;
+}
+.Testimonials h3{
+  font-family: 'Markazi Text', serif;
+  color: #F4CE14;
+  font-size: 36px;
+  text-align: center;
+  justify-self: center;
+}
+
+.Testimonials_h1 {
+  margin-bottom: 5rem;
 }

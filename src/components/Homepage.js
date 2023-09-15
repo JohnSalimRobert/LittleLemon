@@ -1,6 +1,7 @@
 import React from 'react'
 import homepageImg from '../images/Homepage.png'
 import Specials from './Specials'
+import Testimonials from './Testimonials'
 function Homepage() {
   return (
     <main>
@@ -20,7 +21,7 @@ function Homepage() {
           <Specials />
         </div>
         <div className='Testimonials-section'>
-          Testimonials
+          <Testimonials />
         </div>
         <div>Chicago</div>
       </div>
