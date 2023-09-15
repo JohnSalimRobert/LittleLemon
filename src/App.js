@@ -1,8 +1,10 @@
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Main from './components/Main';
+import BookingTable from  './components/BookingTable'
 import Nav from './components/Nav';
+import Homepage from './components/Homepage';
+import {Routes, Route} from "react-router-dom";
 
 function App() {
   return (
@@ -10,7 +12,10 @@ function App() {
     <div className='App'>
     <Header />
     <Nav />
-    <Main />
+    <Routes>
+    <Route path='/bookingTable' element= { <BookingTable /> } />
+    <Route path='/' element= { <Homepage /> } />
+    </Routes>
     <Footer />
     </div>
     </>
