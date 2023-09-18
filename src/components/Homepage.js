@@ -2,6 +2,7 @@ import React from 'react'
 import homepageImg from '../images/Homepage.png'
 import Specials from './Specials'
 import Testimonials from './Testimonials'
+import Chicago from './Chicago'
 function Homepage() {
   return (
     <main>
@@ -23,7 +24,9 @@ function Homepage() {
         <div className='Testimonials-section'>
           <Testimonials />
         </div>
-        <div>Chicago</div>
+        <div>
+          <Chicago />
+        </div>
       </div>
     </main>
   )

@@ -56,7 +56,9 @@ function Specials() {
                    <p>{slides.price}</p>
                    </div>
                    <p>{slides.descriptrion}</p>
+                   <div className='Specials_footer'>
                    <p>Order for Delivery</p>
+                   </div>
                    </article>
                    </section>
                 </SwiperSlide>
