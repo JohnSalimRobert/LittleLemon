@@ -13,7 +13,7 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
     time: "17:00",
     date: "",
     noOfGuests: "",
-    occasion: "",
+    occasion: "Birthday",
     sitting: "Inside",
     addInfo: "",
   });
@@ -24,8 +24,14 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(form.date===""){
+      alert("please enter date")
+    }
+    else if(form.noOfGuests === ""){
+      alert("please enter number of guests")
+    }else{
     console.log("Form submitted");
-    submitForm(form)
+    submitForm(form)}
   };
 
   const handleTime = (e) => {
@@ -43,6 +49,32 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
     transform: "rotate(180deg)", // Rotate the image 45 degrees
     width: "3rem",
   };
+    // Create a state variable to store the date
+    const [selectedDate, setSelectedDate] = useState(getFormattedToday());
+    const [rangeValue, setRangeValue] = useState();
+
+    // Function to get today's date in YYYY-MM-DD format
+    function getFormattedToday() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0"); // Month is 0-based
+      const day = String(today.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+    // Handle changes in the date input
+    function handleDateChange(e) {
+      setForm({
+        ...form,
+        date: e.target.value,
+      })
+    }
+    function handleRangeChange(e){
+      setRangeValue(e.target.value)
+      setForm({
+        ...form,
+        noOfGuests: rangeValue,
+      });
+    }
   return (
     <main>
       <form onSubmit={handleSubmit}>
@@ -82,10 +114,12 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                   onChange={(e) => {
                     handleTime(e);
                   }}
+                  aria-label="Choose Time"
+                  required
                 >
                   {availableTimes? availableTimes.map((time) => {
                     return (
-                      <option key={time} id="time" name="time" value={time}>
+                      <option key={time} id="time" name="time" value={time} aria-label={`Option ${time}`}>
                         {time}
                       </option>
                     );
@@ -96,28 +130,23 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                   type="date"
                   id="date"
                   name="date"
-                  value={form.date}
-                  onChange={(e) => {
-                    setForm({
-                      ...form,
-                      date: e.target.value,
-                    });
-                  }}
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  min={selectedDate}
+                  aria-label="Choose Date"
+                  required
                 />
-                <label htmlFor="noofguests">Number of Guests</label>
+                <label htmlFor="noofguests">Number of Guests: {rangeValue}</label>
                 <input
                   type="range"
                   id="noofguests"
                   name="noofguests"
                   min="1"
                   max="10"
-                  value={form.noOfGuests}
-                  onChange={(e) => {
-                    setForm({
-                      ...form,
-                      noOfGuests: e.target.value,
-                    });
-                  }}
+                  value={rangeValue}
+                  aria-label="Choose number of Guests"
+                  onChange={handleRangeChange}
+                  required
                 />
               </div>
             </div>
@@ -138,6 +167,8 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                       occasion: e.target.value,
                     });
                   }}
+                  aria-label="Choose Occasion"
+                  required
                 >
                   <option value="birthday">Birthday</option>
                   <option value="engagement">Engagement</option>
@@ -156,6 +187,7 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                           sitting: e.target.value,
                         });
                       }}
+                      aria-label="Choose outside"
                     />
                     <img src={outdoorSeating} alt="Outdoor seating" />
                   </label>
@@ -170,6 +202,7 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                           sitting: e.target.value,
                         });
                       }}
+                      aria-label="Choose seating Inside"
                       checked
                     />
                     <img src={indoorSeating} alt="Indoor seating" />
@@ -189,6 +222,9 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                       addInfo: e.target.value,
                     });
                   }}
+                  aria-label="Give your additional Information"
+                  required
+                  maxLength="15"
                 ></textarea>
               </div>
             </div>
@@ -209,6 +245,8 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                     name: e.target.value,
                   });
                 }}
+                aria-label="Your Name"
+                required
               />
               <label htmlFor="phone">Phone Number</label>
               <input
@@ -216,7 +254,7 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                 name="phone"
                 id="phone"
                 placeholder="eg: 03XX-XXXXXXX"
-                pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+                pattern="[0-9]{4}[0-9]{3}[0-9]{4}"
                 value={form.phone}
                 onChange={(e) => {
                   setForm({
@@ -224,6 +262,8 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                     phone: e.target.value,
                   });
                 }}
+                aria-label="Your Phone number"
+                required
               />
               <label htmlFor="email">Email</label>
               <input
@@ -238,6 +278,8 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                     email: e.target.value,
                   });
                 }}
+                aria-label="Your email"
+                required
               />
               <label htmlFor="ccn">Card Number</label>
               <input
@@ -256,6 +298,8 @@ function BookingTable({ availableTimes, updateTimes, submitForm }) {
                     cardNo: e.target.value,
                   });
                 }}
+                aria-label="Your card number"
+                required
               ></input>
             </div>
             <button type="submit">Submit</button>
